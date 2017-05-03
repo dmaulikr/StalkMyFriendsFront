@@ -26,7 +26,7 @@
         <!--Me-->
         <scene sceneID="QIv-7X-qQo">
             <objects>
-                <viewController id="4fM-g8-7eU" sceneMemberID="viewController">
+                <viewController id="4fM-g8-7eU" customClass="MeController" customModule="Maps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kc0-yZ-iIL"/>
                         <viewControllerLayoutGuide type="bottom" id="hOw-iv-frX"/>
@@ -73,7 +73,7 @@
         <!--My contacts-->
         <scene sceneID="ikF-wY-0DZ">
             <objects>
-                <viewController id="XoM-w6-cbH" sceneMemberID="viewController">
+                <viewController id="XoM-w6-cbH" customClass="MyContatsController" customModule="Maps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qxA-Jv-iE9"/>
                         <viewControllerLayoutGuide type="bottom" id="qYC-tS-CeN"/>
@@ -170,6 +170,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Log in"/>
                                 <connections>
+                                    <action selector="sendLogIn:" destination="Ehh-Ek-tQr" eventType="touchUpInside" id="YqO-eY-LQH"/>
                                     <segue destination="EHm-s0-CVk" kind="presentation" id="Uig-MT-FGS"/>
                                 </connections>
                             </button>
@@ -197,6 +198,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NQN-oM-7Lp"/>
+                    <connections>
+                        <outlet property="logButton" destination="IJi-zW-BHn" id="khk-dF-dtk"/>
+                        <outlet property="logIn" destination="IJi-zW-BHn" id="TNP-B8-8JW"/>
+                        <outlet property="mdp" destination="dt1-sw-jtX" id="hQw-J3-Zgu"/>
+                        <outlet property="password" destination="dt1-sw-jtX" id="Yhc-N1-eN9"/>
+                        <outlet property="phoneNumber" destination="S5n-oT-QTS" id="IF8-Su-nP9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mqL-XY-CSA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
