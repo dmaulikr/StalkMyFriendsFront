@@ -1,5 +1,5 @@
 //
-//  MyContatsController.swift
+//  MyContactsController.swift
 //  Maps
 //
 //  Created by Visal Sam on 20/04/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyContatsController: UIViewController {
+class MyContactsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
