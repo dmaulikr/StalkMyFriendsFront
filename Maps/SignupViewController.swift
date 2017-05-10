@@ -57,7 +57,24 @@ class SignupViewController: UIViewController {
         }
         
         // Send data to server
+        let login_url = URL(string: "localhost")
+        let session = URLSession.shared
         
+        let request = NSMutableURLRequest(url: login_url!)
+        request.httpMethod = "POST"
+        
+        // Add params and grab query
+        var url = URLComponents()
+        let firstNameQuery = URLQueryItem(name:"firstName", value:firstName)
+        let lastNameQuery = URLQueryItem(name:"lastName", value:lastName)
+        let mailQuery = URLQueryItem(name:"mail", value:mail)
+        let phoneNumberQuery = URLQueryItem(name:"phoneNumber", value:phoneNumber)
+        let passwordQuery = URLQueryItem(name:"password", value:password)
+        url.queryItems = [firstNameQuery, lastNameQuery, mailQuery, phoneNumberQuery, passwordQuery]
+        
+        let toSend = url.query
+        print(toSend)
+        request.httpBody = toSend?.data(using: String.Encoding.utf8)
         
     }
     
