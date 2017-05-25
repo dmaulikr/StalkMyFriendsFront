@@ -35,7 +35,7 @@ class SignupViewController: UIViewController {
             let password = passwordText.text else {
                 displayAlertMessage(userMessage: "All fields are required")
                 return
-        }
+            }
         
         // Check for empty fields
         if(firstName.isEmpty || lastName.isEmpty || mail.isEmpty || phoneNumber.isEmpty || password.isEmpty) {
@@ -56,9 +56,42 @@ class SignupViewController: UIViewController {
             return
         }
         
+        runSignup(firstname:firstName, lastname:lastName, mail:mail, user:phoneNumber, pass:password)
+
         // Send data to server
         
+        // Add params and grab query
+//        var url = URLComponents()
+//        let firstNameQuery = URLQueryItem(name:"firstName", value:firstName)
+//        let lastNameQuery = URLQueryItem(name:"lastName", value:lastName)
+//        let mailQuery = URLQueryItem(name:"mail", value:mail)
+//        let phoneNumberQuery = URLQueryItem(name:"phoneNumber", value:phoneNumber)
+//        let passwordQuery = URLQueryItem(name:"password", value:password)
+//        url.queryItems = [firstNameQuery, lastNameQuery, mailQuery, phoneNumberQuery, passwordQuery]
         
+//        let toSend = url.query
+//        request.httpBody = toSend?.data(using: String.Encoding.utf8)
+//        
+        }
+    
+    
+    //Connection to server and serialize data into JSON
+    func runSignup(firstname:String, lastname:String, mail:String, user:String, pass:String)
+    {
+        let login_url = URL(string: "52.232.34.116:8080/a/create")
+        //let session = URLSession.shared
+        
+        let request = NSMutableURLRequest(url: login_url!)
+        request.httpMethod = "POST"
+        
+        let toSend = ["firstname": firstname, "lastname": lastname, "mail": mail, "user": user,"pass":pass]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: toSend, options: .prettyPrinted)
+            print(NSString(data: request.httpBody!, encoding:String.Encoding.utf8.rawValue)!)
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     // Display an alert message

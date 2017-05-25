@@ -39,22 +39,31 @@ class LoginViewController: UIViewController {
     
     // Connection to server
     func runLog(user:String, pass:String) {
-        let login_url = URL(string: "localhost")
+        let login_url = URL(string: "52.232.34.116:8080/a/connect")
         let session = URLSession.shared
         
         let request = NSMutableURLRequest(url: login_url!)
         request.httpMethod = "POST"
         
         // Add params and grab query
-        var url = URLComponents()
-        let userQuery = URLQueryItem(name:"user", value:user)
-        let passQuery = URLQueryItem(name:"password", value:pass)
-        url.queryItems = [userQuery, passQuery]
+//        var url = URLComponents()
+//        let userQuery = URLQueryItem(name:"user", value:user)
+//        let passQuery = URLQueryItem(name:"password", value:pass)
+//        url.queryItems = [userQuery, passQuery]
         
-        let toSend = url.query
-        print(toSend)
-        request.httpBody = toSend?.data(using: String.Encoding.utf8)
+//        let toSend = url.query
+//        request.httpBody = toSend?.data(using: String.Encoding.utf8)
+
+        let toSend = ["user": user,"pass":pass]
         
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: toSend, options: .prettyPrinted)
+            print(NSString(data: request.httpBody!, encoding:String.Encoding.utf8.rawValue)!)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+
+       
         let task = session.dataTask(with:request as URLRequest, completionHandler:{ (data, response, error) in
             guard let _:Data = data, let _:URLResponse = response  , error == nil else {
                 return
