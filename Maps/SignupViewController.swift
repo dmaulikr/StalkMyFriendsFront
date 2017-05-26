@@ -57,34 +57,24 @@ class SignupViewController: UIViewController {
         }
         
         runSignup(firstname:firstName, lastname:lastName, mail:mail, user:phoneNumber, pass:password)
-
-        // Send data to server
-        
-        // Add params and grab query
-//        var url = URLComponents()
-//        let firstNameQuery = URLQueryItem(name:"firstName", value:firstName)
-//        let lastNameQuery = URLQueryItem(name:"lastName", value:lastName)
-//        let mailQuery = URLQueryItem(name:"mail", value:mail)
-//        let phoneNumberQuery = URLQueryItem(name:"phoneNumber", value:phoneNumber)
-//        let passwordQuery = URLQueryItem(name:"password", value:password)
-//        url.queryItems = [firstNameQuery, lastNameQuery, mailQuery, phoneNumberQuery, passwordQuery]
-        
-//        let toSend = url.query
-//        request.httpBody = toSend?.data(using: String.Encoding.utf8)
-//        
-        }
+    }
     
     
     //Connection to server and serialize data into JSON
     func runSignup(firstname:String, lastname:String, mail:String, user:String, pass:String)
     {
-        let login_url = URL(string: "52.232.34.116:8080/a/create")
-        //let session = URLSession.shared
+        guard let url = NSURL(string: "http://52.232.34.116:8080/a/create") else {
+            print("Error url")
+            return
+        }
         
-        let request = NSMutableURLRequest(url: login_url!)
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url as URL)
         request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        let toSend = ["firstname": firstname, "lastname": lastname, "mail": mail, "user": user,"pass":pass]
+        let toSend = ["firstName": firstname, "lastName": lastname, "phoneNumber": user, "email": mail, "password":pass]
         
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: toSend, options: .prettyPrinted)
@@ -92,6 +82,21 @@ class SignupViewController: UIViewController {
         } catch let error {
             print(error.localizedDescription)
         }
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                if let responseJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] {
+                    print("\n\n\n\n\(responseJSON)")
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        })
+        task.resume()
     }
     
     // Display an alert message

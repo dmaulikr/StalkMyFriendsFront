@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Ehh-Ek-tQr" kind="relationship" relationship="rootViewController" id="5uJ-VV-BvB"/>
+                        <segue destination="Ehh-Ek-tQr" kind="relationship" relationship="rootViewController" id="Vm6-hn-4og"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wcf-ZW-ObN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -106,7 +106,6 @@
         <!--My contacts-->
         <scene sceneID="ikF-wY-0DZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YLx-PC-BbV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="XoM-w6-cbH" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qxA-Jv-iE9"/>
@@ -127,6 +126,7 @@
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="shk-ml-KnC" userLabel="My contacts"/>
                     <navigationItem key="navigationItem" title="My contacts" id="lTa-6u-LhL"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YLx-PC-BbV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="414" y="340"/>
         </scene>
@@ -177,7 +177,7 @@
         <!--Login View Controller-->
         <scene sceneID="GWb-sz-LxQ">
             <objects>
-                <viewController id="Ehh-Ek-tQr" customClass="LoginViewController" customModule="Maps" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginView" id="Ehh-Ek-tQr" customClass="LoginViewController" customModule="Maps" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AY9-pJ-Azn"/>
                         <viewControllerLayoutGuide type="bottom" id="hOC-8e-GQh"/>
@@ -343,6 +343,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="63x-r8-pTp"/>
+        <segue reference="Vm6-hn-4og"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -6,15 +6,21 @@
 //  Copyright © 2017 Visal Sam. All rights reserved.
 //
 
+import GoogleMobileAds
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, GADInterstitialDelegate {
+    var interstitial: GADInterstitial!
     
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        interstitial = createAndLoadInterstitial()
+        
         let preferences = UserDefaults.standard
         
         if(preferences.object(forKey: "session") != nil) {
@@ -23,6 +29,31 @@ class LoginViewController: UIViewController {
         else {
             LoginToDo()
         }
+    }
+    
+    private func createAndLoadInterstitial() -> GADInterstitial? {
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        
+        guard let interstitial = interstitial else {
+            return nil
+        }
+        
+        let request = GADRequest()
+        // Remove the following line before you upload the app
+        request.testDevices = [ kGADSimulatorID ]
+        interstitial.load(request)
+        interstitial.delegate = self
+        
+        return interstitial
+    }
+    
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        print("Interstitial loaded successfully")
+        ad.present(fromRootViewController: self)
+    }
+    
+    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+        print("Fail to receive interstitial")
     }
     
     @IBAction func sendLogin(_ sender: AnyObject) {
@@ -39,21 +70,18 @@ class LoginViewController: UIViewController {
     
     // Connection to server
     func runLog(user:String, pass:String) {
-        let login_url = URL(string: "52.232.34.116:8080/a/connect")
-        let session = URLSession.shared
+        guard let url = NSURL(string: "http://52.232.34.116:8080/a/connect") else {
+            print("Error url")
+            return
+        }
         
-        let request = NSMutableURLRequest(url: login_url!)
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: url as URL)
         request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         // Add params and grab query
-//        var url = URLComponents()
-//        let userQuery = URLQueryItem(name:"user", value:user)
-//        let passQuery = URLQueryItem(name:"password", value:pass)
-//        url.queryItems = [userQuery, passQuery]
-        
-//        let toSend = url.query
-//        request.httpBody = toSend?.data(using: String.Encoding.utf8)
-
         let toSend = ["phone": user,"password":pass]
         
         do {
@@ -63,32 +91,26 @@ class LoginViewController: UIViewController {
             print(error.localizedDescription)
         }
 
-       
-        let task = session.dataTask(with:request as URLRequest, completionHandler:{ (data, response, error) in
-            guard let _:Data = data, let _:URLResponse = response  , error == nil else {
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            guard let data = data, error == nil else {
                 return
             }
             
-            let json: Any?
             do {
-                json = try JSONSerialization.jsonObject(with: data!, options: [])
-            }
-            catch {
-                return
-            }
-            
-            guard let server_response = json as? NSDictionary else {
-                return
-            }
-            
-            if let data_block = server_response["data"] as? NSDictionary {
-                if let session_data = data_block["session"] as? String {
-                    let preferences = UserDefaults.standard
-                    preferences.set(session_data, forKey: "session")
-                    
-                    DispatchQueue.main.async(execute: self.LogDone)
+                if let responseJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] {
+                    print("\n\n\n\n\(responseJSON)")
                 }
+            } catch let error {
+                print(error.localizedDescription)
             }
+//            if let data_block = server_response["data"] as? NSDictionary {
+//                if let session_data = data_block["session"] as? String {
+//                    let preferences = UserDefaults.standard
+//                    preferences.set(session_data, forKey: "session")
+//                    
+//                    DispatchQueue.main.async(execute: self.LogDone)
+//                }
+//            }
         })
         task.resume()
     }
