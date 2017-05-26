@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A83340A71E8CECB20057E0CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83340A61E8CECB20057E0CC /* AppDelegate.swift */; };
-		A83340A91E8CECB20057E0CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83340A81E8CECB20057E0CC /* ViewController.swift */; };
 		A83340AC1E8CECB20057E0CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A83340AA1E8CECB20057E0CC /* Main.storyboard */; };
 		A83340AE1E8CECB20057E0CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A83340AD1E8CECB20057E0CC /* Assets.xcassets */; };
 		A83340B11E8CECB20057E0CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A83340AF1E8CECB20057E0CC /* LaunchScreen.storyboard */; };
@@ -19,6 +18,7 @@
 		A83340DA1E8D04D60057E0CC /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83340D91E8D04D60057E0CC /* Pin.swift */; };
 		A83C633C1EA8DFEC0099160C /* MeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C633B1EA8DFEC0099160C /* MeController.swift */; };
 		A83C633E1EA8E0000099160C /* MyContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C633D1EA8E0000099160C /* MyContactsController.swift */; };
+		A84DFCA81ED8540C001DB6C2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84DFCA71ED8540C001DB6C2 /* Map.swift */; };
 		A88C5BB21EA8FFC2004F0BA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88C5BB11EA8FFC2004F0BA7 /* LoginViewController.swift */; };
 		A88C5BB41EA8FFE2004F0BA7 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88C5BB31EA8FFE2004F0BA7 /* SignupViewController.swift */; };
 /* End PBXBuildFile section */
@@ -43,7 +43,6 @@
 /* Begin PBXFileReference section */
 		A83340A31E8CECB20057E0CC /* Maps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A83340A61E8CECB20057E0CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A83340A81E8CECB20057E0CC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A83340AB1E8CECB20057E0CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A83340AD1E8CECB20057E0CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A83340B01E8CECB20057E0CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,6 +58,7 @@
 		A83340D91E8D04D60057E0CC /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		A83C633B1EA8DFEC0099160C /* MeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeController.swift; sourceTree = "<group>"; };
 		A83C633D1EA8E0000099160C /* MyContactsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyContactsController.swift; sourceTree = "<group>"; };
+		A84DFCA71ED8540C001DB6C2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		A88C5BB11EA8FFC2004F0BA7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A88C5BB31EA8FFE2004F0BA7 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,7 +116,6 @@
 			children = (
 				A83340A61E8CECB20057E0CC /* AppDelegate.swift */,
 				A83340D91E8D04D60057E0CC /* Pin.swift */,
-				A83340A81E8CECB20057E0CC /* ViewController.swift */,
 				A83340AA1E8CECB20057E0CC /* Main.storyboard */,
 				A83340AD1E8CECB20057E0CC /* Assets.xcassets */,
 				A83340AF1E8CECB20057E0CC /* LaunchScreen.storyboard */,
@@ -125,6 +124,7 @@
 				A83C633D1EA8E0000099160C /* MyContactsController.swift */,
 				A88C5BB11EA8FFC2004F0BA7 /* LoginViewController.swift */,
 				A88C5BB31EA8FFE2004F0BA7 /* SignupViewController.swift */,
+				A84DFCA71ED8540C001DB6C2 /* Map.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -293,7 +293,7 @@
 			files = (
 				A88C5BB41EA8FFE2004F0BA7 /* SignupViewController.swift in Sources */,
 				A83340DA1E8D04D60057E0CC /* Pin.swift in Sources */,
-				A83340A91E8CECB20057E0CC /* ViewController.swift in Sources */,
+				A84DFCA81ED8540C001DB6C2 /* Map.swift in Sources */,
 				A83340A71E8CECB20057E0CC /* AppDelegate.swift in Sources */,
 				A88C5BB21EA8FFC2004F0BA7 /* LoginViewController.swift in Sources */,
 				A83C633E1EA8E0000099160C /* MyContactsController.swift in Sources */,
