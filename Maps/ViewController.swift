@@ -11,7 +11,7 @@ import MapKit
 
 class ViewController: UIViewController, MKMapViewDelegate {
 
-    @IBOutlet var ME: UIToolbar!
+    //@IBOutlet var ME: UIToolbar!
 
     @IBOutlet var myLocation: MKMapView!
     
@@ -42,11 +42,5 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let region = MKCoordinateRegionMakeWithDistance (center, width, height )
         mapView.setRegion(region, animated : true )
     }
-    
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        let anoView = MKAnnotation(annotation = annotation, reuseidentifier = "pin")
-//        anoView.image() = UIImage(named: "")
-//        return anoView
-//    }
 }
 
