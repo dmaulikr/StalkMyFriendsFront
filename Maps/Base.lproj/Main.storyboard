@@ -39,14 +39,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share my location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHI-gE-ii0">
-                                <rect key="frame" x="82" y="143" width="152" height="23"/>
+                                <rect key="frame" x="56" y="153" width="152" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CkG-Dq-124">
-                                <rect key="frame" x="272" y="139" width="51" height="31"/>
-                            </switch>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vAY-Ia-2XB">
                                 <rect key="frame" x="2" y="-10" width="375" height="74"/>
                                 <items>
@@ -68,18 +65,21 @@
                                     <segue destination="h40-Io-wSF" kind="presentation" id="9Pn-q9-kfX"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CkG-Dq-124">
+                                <rect key="frame" x="260" y="153" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CkG-Dq-124" firstAttribute="top" secondItem="vAY-Ia-2XB" secondAttribute="bottom" constant="75" id="DxG-OM-TI0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CkG-Dq-124" secondAttribute="trailing" constant="38" id="LYV-m4-KCj"/>
-                            <constraint firstItem="CkG-Dq-124" firstAttribute="centerY" secondItem="nHI-gE-ii0" secondAttribute="centerY" id="NwI-H9-4Su"/>
-                            <constraint firstItem="nHI-gE-ii0" firstAttribute="leading" secondItem="eXJ-Ar-7CC" secondAttribute="leadingMargin" constant="66" id="SzZ-PG-Opk"/>
+                            <constraint firstItem="CkG-Dq-124" firstAttribute="top" secondItem="vAY-Ia-2XB" secondAttribute="bottom" constant="89" id="5t1-uq-mtI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CkG-Dq-124" secondAttribute="trailing" constant="50" id="70f-h2-gnj"/>
+                            <constraint firstItem="nHI-gE-ii0" firstAttribute="leading" secondItem="eXJ-Ar-7CC" secondAttribute="leadingMargin" constant="40" id="8iE-k3-Mww"/>
                             <constraint firstItem="vAY-Ia-2XB" firstAttribute="leading" secondItem="eXJ-Ar-7CC" secondAttribute="leadingMargin" constant="-14" id="TcU-UP-K7R"/>
+                            <constraint firstItem="vAY-Ia-2XB" firstAttribute="top" secondItem="eXJ-Ar-7CC" secondAttribute="topMargin" constant="-10" id="VKU-b8-IeR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vAY-Ia-2XB" secondAttribute="trailing" constant="-18" id="f6t-7b-9QT"/>
                             <constraint firstItem="vAY-Ia-2XB" firstAttribute="centerX" secondItem="T8O-I4-5ip" secondAttribute="centerX" id="iht-AR-Lad"/>
                             <constraint firstItem="hOw-iv-frX" firstAttribute="top" secondItem="T8O-I4-5ip" secondAttribute="bottom" constant="67" id="mqb-CF-8Hq"/>
-                            <constraint firstItem="CkG-Dq-124" firstAttribute="top" secondItem="eXJ-Ar-7CC" secondAttribute="top" constant="139" id="sKh-aG-p6v"/>
+                            <constraint firstItem="nHI-gE-ii0" firstAttribute="top" secondItem="vAY-Ia-2XB" secondAttribute="bottom" constant="89" id="nbB-mx-RM5"/>
                             <constraint firstItem="T8O-I4-5ip" firstAttribute="leading" secondItem="eXJ-Ar-7CC" secondAttribute="leadingMargin" constant="73" id="zc3-2g-3j7"/>
                         </constraints>
                     </view>
@@ -87,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Qs-uU-G74" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="414" y="1231"/>
+            <point key="canvasLocation" x="413.60000000000002" y="1230.1349325337333"/>
         </scene>
         <!--My contacts-->
         <scene sceneID="ikF-wY-0DZ">
@@ -114,12 +114,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="REP-7Z-2Vk" firstAttribute="top" secondItem="LMz-tA-tqc" secondAttribute="top" id="DeF-Ya-3wd"/>
-                            <constraint firstItem="l57-YL-3rT" firstAttribute="top" secondItem="REP-7Z-2Vk" secondAttribute="bottom" constant="79" id="RcY-sw-AUg"/>
-                            <constraint firstAttribute="trailing" secondItem="REP-7Z-2Vk" secondAttribute="trailing" constant="-2" id="aPu-tm-eZq"/>
-                            <constraint firstItem="REP-7Z-2Vk" firstAttribute="leading" secondItem="LMz-tA-tqc" secondAttribute="leading" constant="2" id="iTT-e5-Oap"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="l57-YL-3rT" secondAttribute="trailing" constant="14" id="lrb-Qc-s3I"/>
-                            <constraint firstItem="l57-YL-3rT" firstAttribute="leading" secondItem="LMz-tA-tqc" secondAttribute="leadingMargin" constant="14" id="vKY-g7-V2x"/>
+                            <constraint firstAttribute="trailing" secondItem="REP-7Z-2Vk" secondAttribute="trailing" constant="-2" id="0Nf-Dz-OBF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="l57-YL-3rT" secondAttribute="trailing" constant="14" id="4hH-kb-baA"/>
+                            <constraint firstItem="REP-7Z-2Vk" firstAttribute="leading" secondItem="LMz-tA-tqc" secondAttribute="leading" constant="2" id="NPf-ln-3cK"/>
+                            <constraint firstItem="l57-YL-3rT" firstAttribute="leading" secondItem="LMz-tA-tqc" secondAttribute="leadingMargin" constant="14" id="gIi-1d-Nuo"/>
+                            <constraint firstItem="REP-7Z-2Vk" firstAttribute="top" secondItem="LMz-tA-tqc" secondAttribute="top" id="hkG-nd-5Gn"/>
+                            <constraint firstItem="l57-YL-3rT" firstAttribute="top" secondItem="REP-7Z-2Vk" secondAttribute="bottom" constant="79" id="r5c-63-QKL"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Contacts" image="Contacts2" selectedImage="Contacts2" id="shk-ml-KnC" userLabel="My contacts"/>
