@@ -93,24 +93,31 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
         
         let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
             guard let data = data, error == nil else {
+//                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+//                    print("caca")
+//                    self.displayAlertMessage(userMessage: "Wrong password or email")
+//                }
+                
+//                if let httpResponse = response as? HTTPURLResponse {
+//                    print("1233")
+//                    print(httpResponse.statusCode)
+//                }
                 return
             }
-            
             do {
-                if let responseJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] {
-                    print("\n\n\n\n\(responseJSON)")
+//                if let responseJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] {
+//                    
+//                    
+//                }
+            //if responseJSON != nil{
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "loginToMap", sender: self)
+                    }
                 }
-            } catch let error {
-                print(error.localizedDescription)
-            }
-            //            if let data_block = server_response["data"] as? NSDictionary {
-            //                if let session_data = data_block["session"] as? String {
-            //                    let preferences = UserDefaults.standard
-            //                    preferences.set(session_data, forKey: "session")
-            //
-            //                    DispatchQueue.main.async(execute: self.LogDone)
-            //                }
-            //            }
+            //}
+//            catch let error {
+//                print(error.localizedDescription)
+//            }
         })
         task.resume()
     }
@@ -125,6 +132,7 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
         password.isEnabled = false
     }
     
+
     
     // Display an alert message
     func displayAlertMessage(userMessage: String){

@@ -19,8 +19,6 @@ class Map: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
         //Show my position in Map
         myLocation.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
         
@@ -52,9 +50,10 @@ class Map: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.tabBarController?.navigationItem.hidesBackButton = true
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     func mapView ( _ mapView : MKMapView , didUpdate userLocation : MKUserLocation ) {
