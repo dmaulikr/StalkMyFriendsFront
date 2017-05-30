@@ -1,5 +1,5 @@
 //
-//  MeController.swift
+//  ContactsViewController.swift
 //  Maps
 //
 //  Created by Visal Sam on 20/04/2017.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class MeController: UIViewController {
+class ContactsViewController: UIViewController {
     
 }

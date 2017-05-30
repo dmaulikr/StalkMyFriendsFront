@@ -16,8 +16,8 @@
 		A83340D61E8CF40F0057E0CC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83340D51E8CF40F0057E0CC /* MapKit.framework */; };
 		A83340D81E8CF5420057E0CC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83340D71E8CF5420057E0CC /* CoreLocation.framework */; };
 		A83340DA1E8D04D60057E0CC /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83340D91E8D04D60057E0CC /* Pin.swift */; };
-		A83C633C1EA8DFEC0099160C /* MeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C633B1EA8DFEC0099160C /* MeController.swift */; };
-		A83C633E1EA8E0000099160C /* MyContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C633D1EA8E0000099160C /* MyContactsController.swift */; };
+		A83C633C1EA8DFEC0099160C /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C633B1EA8DFEC0099160C /* MeViewController.swift */; };
+		A83C633E1EA8E0000099160C /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83C633D1EA8E0000099160C /* ContactsViewController.swift */; };
 		A84DFCA81ED8540C001DB6C2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84DFCA71ED8540C001DB6C2 /* Map.swift */; };
 		A88C5BB21EA8FFC2004F0BA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88C5BB11EA8FFC2004F0BA7 /* LoginViewController.swift */; };
 		A88C5BB41EA8FFE2004F0BA7 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88C5BB31EA8FFE2004F0BA7 /* SignupViewController.swift */; };
@@ -57,8 +57,8 @@
 		A83340D51E8CF40F0057E0CC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A83340D71E8CF5420057E0CC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A83340D91E8D04D60057E0CC /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
-		A83C633B1EA8DFEC0099160C /* MeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeController.swift; sourceTree = "<group>"; };
-		A83C633D1EA8E0000099160C /* MyContactsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyContactsController.swift; sourceTree = "<group>"; };
+		A83C633B1EA8DFEC0099160C /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		A83C633D1EA8E0000099160C /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A84DFCA71ED8540C001DB6C2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		A88C5BB11EA8FFC2004F0BA7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A88C5BB31EA8FFE2004F0BA7 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -123,8 +123,8 @@
 				A83340AD1E8CECB20057E0CC /* Assets.xcassets */,
 				A83340AF1E8CECB20057E0CC /* LaunchScreen.storyboard */,
 				A83340B21E8CECB20057E0CC /* Info.plist */,
-				A83C633B1EA8DFEC0099160C /* MeController.swift */,
-				A83C633D1EA8E0000099160C /* MyContactsController.swift */,
+				A83C633B1EA8DFEC0099160C /* MeViewController.swift */,
+				A83C633D1EA8E0000099160C /* ContactsViewController.swift */,
 				A88C5BB11EA8FFC2004F0BA7 /* LoginViewController.swift */,
 				A88C5BB31EA8FFE2004F0BA7 /* SignupViewController.swift */,
 				A84DFCA71ED8540C001DB6C2 /* Map.swift */,
@@ -300,8 +300,8 @@
 				A84DFCA81ED8540C001DB6C2 /* Map.swift in Sources */,
 				A83340A71E8CECB20057E0CC /* AppDelegate.swift in Sources */,
 				A88C5BB21EA8FFC2004F0BA7 /* LoginViewController.swift in Sources */,
-				A83C633E1EA8E0000099160C /* MyContactsController.swift in Sources */,
-				A83C633C1EA8DFEC0099160C /* MeController.swift in Sources */,
+				A83C633E1EA8E0000099160C /* ContactsViewController.swift in Sources */,
+				A83C633C1EA8DFEC0099160C /* MeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, GADInterstitialDelegate {
+    
+    var interstitial: GADInterstitial!
+    var defaults = UserDefaults.standard
     
     @IBOutlet weak var firstNameText: UITextField!
     @IBOutlet weak var lastNameText: UITextField!
@@ -19,6 +23,31 @@ class SignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    private func createAndLoadInterstitial() -> GADInterstitial? {
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        
+        guard let interstitial = interstitial else {
+            return nil
+        }
+        
+        let request = GADRequest()
+        // Remove the following line before you upload the app
+        request.testDevices = [ kGADSimulatorID ]
+        interstitial.load(request)
+        interstitial.delegate = self
+        
+        return interstitial
+    }
+    
+    func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+        print("Interstitial loaded successfully")
+        ad.present(fromRootViewController: self)
+    }
+    
+    func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+        print("Fail to receive interstitial")
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,37 +62,26 @@ class SignupViewController: UIViewController {
             let mail = mailText.text,
             let phoneNumber = phoneNumberText.text,
             let password = passwordText.text else {
-                displayAlertMessage(userMessage: "All fields are required")
                 return
             }
         
         // Check for empty fields
         if(firstName.isEmpty || lastName.isEmpty || mail.isEmpty || phoneNumber.isEmpty || password.isEmpty) {
-            // Display alert message
-            displayAlertMessage(userMessage: "All fields are required")
+            displayAlertMessage(title: "Empty fields", userMessage: "All fields are required")
             return
         }
         
         if(mail.characters.count <= 6) {
-            // Display alert message
-            displayAlertMessage(userMessage: "Mail invalid")
+            displayAlertMessage(title: "Mail invalid", userMessage: "Mail has to be at least 6 characters")
             return
         }
         
         if(phoneNumber.characters.count != 10) {
-            // Display alert message
-            displayAlertMessage(userMessage: "Phone number invalid")
+            displayAlertMessage(title: "Phone number invalid", userMessage: "Phone number has to be 10 characters")
             return
         }
         
-        runSignup(firstname: firstName, lastname: lastName, mail: mail, user: phoneNumber, pass: password)
-    }
-    
-    //Connection to server and serialize data into JSON
-    func runSignup(firstname:String, lastname:String, mail:String, user:String, pass:String)
-    {
         guard let url = NSURL(string: "http://52.232.34.116:8080/api/user/create") else {
-            print("Error url")
             return
         }
         
@@ -73,39 +91,57 @@ class SignupViewController: UIViewController {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        let toSend = ["firstName": firstname, "lastName": lastname, "phoneNumber": user, "email": mail, "password":pass]
+        let toSend = ["firstName": firstName, "lastName": lastName, "phoneNumber": phoneNumber, "email": mail, "password": password]
         
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: toSend, options: .prettyPrinted)
-            print(NSString(data: request.httpBody!, encoding:String.Encoding.utf8.rawValue)!)
         } catch let error {
             print(error.localizedDescription)
         }
         
-        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            do {
-                if let responseJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] {
-                    print("\n\n\n\n\(responseJSON)")
+        DispatchQueue.main.async {
+            let task = session.dataTask(with: request as URLRequest) { data, response, error in
+                if error != nil{
+                    self.displayAlertMessage(title: "Error server", userMessage: "Error from server")
+                    return
                 }
-            } catch let error {
-                print(error.localizedDescription)
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                    self.displayAlertMessage(title: "Account exists", userMessage: "An account linked to this phone number already exists")
+                    return
+                }
+            
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                    
+                    if let responseJSON = json {
+                        self.defaults.set(responseJSON["firstName"], forKey: "firstName")
+                        self.defaults.set(responseJSON["lastName"], forKey: "lastName")
+                        self.defaults.set(responseJSON["phoneNumber"], forKey: "phoneNumber")
+                        self.defaults.set(responseJSON["token"], forKey: "token")
+                        self.defaults.synchronize()
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "signupToMap", sender: self)
+                    }
+                    
+                    self.interstitial = self.createAndLoadInterstitial()
+                } catch let error {
+                    print(error.localizedDescription)
+                }
             }
-        })
-        task.resume()
+            task.resume()
+        }
     }
     
     // Display an alert message
-    func displayAlertMessage(userMessage: String){
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
-        
-        myAlert.addAction(okAction)
-    
-        self.present(myAlert, animated: true, completion: nil)
+    func displayAlertMessage(title: String, userMessage: String){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

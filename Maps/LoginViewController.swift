@@ -10,7 +10,9 @@ import UIKit
 import GoogleMobileAds
 
 class LoginViewController: UIViewController, GADInterstitialDelegate {
+    
     var interstitial: GADInterstitial!
+    var defaults = UserDefaults.standard
     
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -19,13 +21,9 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let preferences = UserDefaults.standard
-        
-        if(preferences.object(forKey: "session") != nil) {
-            LogDone()
-        }
-        else {
-            LoginToDo()
+        if(defaults.string(forKey: "token") != nil) {
+            let TabBarControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
+            self.navigationController?.pushViewController(TabBarControllerObj!, animated: false)
         }
     }
     
@@ -93,19 +91,28 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
                     self.displayAlertMessage(title: "Error server", userMessage: "Error from server")
                     return
                 }
+                
                 if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
                     self.displayAlertMessage(title: "No account", userMessage: "Wrong phone number or password")
                     return
                 }
                 
                 do {
-                    if let responseJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String: AnyObject] {
-                        DispatchQueue.main.async {
-                            self.performSegue(withIdentifier: "loginToMap", sender: self)
-                        }
-                        
-                        self.interstitial = self.createAndLoadInterstitial()
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                    
+                    if let responseJSON = json {
+                        self.defaults.set(responseJSON["firstName"], forKey: "firstName")
+                        self.defaults.set(responseJSON["lastName"], forKey: "lastName")
+                        self.defaults.set(responseJSON["phoneNumber"], forKey: "phoneNumber")
+                        self.defaults.set(responseJSON["token"], forKey: "token")
+                        self.defaults.synchronize()
                     }
+                    
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "loginToMap", sender: self)
+                    }
+                        
+                    self.interstitial = self.createAndLoadInterstitial()
                 }
                 catch let error {
                     print(error.localizedDescription)
@@ -114,16 +121,6 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
             task.resume()
         }
 
-    }
-    
-    func LoginToDo() {
-        phoneNumber.isEnabled = true
-        password.isEnabled = true
-    }
-    
-    func LogDone() {
-        phoneNumber.isEnabled = false
-        password.isEnabled = false
     }
     
     // Display an alert message
