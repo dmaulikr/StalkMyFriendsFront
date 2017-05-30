@@ -112,7 +112,7 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "loginToMap", sender: self)
                     }
-                        
+                    usleep(4000000)
                     self.interstitial = self.createAndLoadInterstitial()
                 }
                 catch let error {
