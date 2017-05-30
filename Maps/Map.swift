@@ -35,7 +35,8 @@ class Map: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         //Calcul Distance
         let coordinate1 = CLLocation(latitude: latitude!, longitude: longitude!)
         
-        let coordinate2 = CLLocation(latitude: 48.85, longitude: 2.36)
+        let coordinate2 = CLLocation(latitude: 48.75, longitude: 2.36)
+        //let coordinate2 = CLLocation(latitude: 48.85, longitude: 2.36)
         let distanceInMeters = coordinate1.distance(from: coordinate2)
         
         //Round result
@@ -44,7 +45,8 @@ class Map: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
         let distanceKm = round((distanceInMeters/1000) * multiplier) / multiplier
         
         //Put a Pin
-        let center = CLLocationCoordinate2D ( latitude : 48.85, longitude : 2.36)
+        let center = CLLocationCoordinate2D ( latitude : 48.75, longitude : 2.36)
+        //let center = CLLocationCoordinate2D ( latitude : 48.85, longitude : 2.36)
         let pin = Pin(coordinate: center, title: "Henry Dist: \(distanceKm) Km ")
         myLocation.addAnnotation(pin)
     
