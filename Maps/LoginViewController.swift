@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if(defaults.string(forKey: "token") != nil) {
+        if (defaults.string(forKey: "token") != nil && defaults.bool(forKey: "isConnected")) {
             let TabBarControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController
             self.navigationController?.pushViewController(TabBarControllerObj!, animated: false)
         }
@@ -105,6 +105,7 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
                         self.defaults.set(responseJSON["lastName"], forKey: "lastName")
                         self.defaults.set(responseJSON["phoneNumber"], forKey: "phoneNumber")
                         self.defaults.set(responseJSON["token"], forKey: "token")
+                        self.defaults.set(true, forKey: "isConnected")
                         self.defaults.synchronize()
                     }
                     
@@ -120,7 +121,6 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
             }
             task.resume()
         }
-
     }
     
     // Display an alert message

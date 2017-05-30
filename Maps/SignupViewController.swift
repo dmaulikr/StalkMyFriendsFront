@@ -119,6 +119,7 @@ class SignupViewController: UIViewController, GADInterstitialDelegate {
                         self.defaults.set(responseJSON["lastName"], forKey: "lastName")
                         self.defaults.set(responseJSON["phoneNumber"], forKey: "phoneNumber")
                         self.defaults.set(responseJSON["token"], forKey: "token")
+                        self.defaults.set(true, forKey: "isConnected")
                         self.defaults.synchronize()
                     }
                     
