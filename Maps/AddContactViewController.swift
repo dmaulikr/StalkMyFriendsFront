@@ -62,6 +62,8 @@ class AddContactViewController: UIViewController {
                     return
                 }
                 
+                self.displayAlertMessage(title: "Contact added", userMessage: "You have a new friend")
+                
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "addContactToList", sender: self)
                 }

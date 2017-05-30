@@ -126,7 +126,7 @@ class SignupViewController: UIViewController, GADInterstitialDelegate {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "signupToMap", sender: self)
                     }
-                    
+                    usleep(4000000)
                     self.interstitial = self.createAndLoadInterstitial()
                 } catch let error {
                     print(error.localizedDescription)
