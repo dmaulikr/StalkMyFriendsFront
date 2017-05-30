@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A820F2E31EDDC5D90052AD8B /* AddContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A820F2E21EDDC5D90052AD8B /* AddContact.swift */; };
 		A83340A71E8CECB20057E0CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83340A61E8CECB20057E0CC /* AppDelegate.swift */; };
 		A83340AC1E8CECB20057E0CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A83340AA1E8CECB20057E0CC /* Main.storyboard */; };
 		A83340AE1E8CECB20057E0CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A83340AD1E8CECB20057E0CC /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A820F2E21EDDC5D90052AD8B /* AddContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContact.swift; sourceTree = "<group>"; };
 		A83340A31E8CECB20057E0CC /* Maps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A83340A61E8CECB20057E0CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A83340AB1E8CECB20057E0CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				A88C5BB11EA8FFC2004F0BA7 /* LoginViewController.swift */,
 				A88C5BB31EA8FFE2004F0BA7 /* SignupViewController.swift */,
 				A84DFCA71ED8540C001DB6C2 /* Map.swift */,
+				A820F2E21EDDC5D90052AD8B /* AddContact.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A820F2E31EDDC5D90052AD8B /* AddContact.swift in Sources */,
 				A88C5BB41EA8FFE2004F0BA7 /* SignupViewController.swift in Sources */,
 				A83340DA1E8D04D60057E0CC /* Pin.swift in Sources */,
 				A84DFCA81ED8540C001DB6C2 /* Map.swift in Sources */,
