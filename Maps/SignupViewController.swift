@@ -56,22 +56,7 @@ class SignupViewController: UIViewController {
             return
         }
         
-        runSignup(firstname:firstName, lastname:lastName, mail:mail, user:phoneNumber, pass:password)
-
-        // Send data to server
-        
-        // Add params and grab query
-//        var url = URLComponents()
-//        let firstNameQuery = URLQueryItem(name:"firstName", value:firstName)
-//        let lastNameQuery = URLQueryItem(name:"lastName", value:lastName)
-//        let mailQuery = URLQueryItem(name:"mail", value:mail)
-//        let phoneNumberQuery = URLQueryItem(name:"phoneNumber", value:phoneNumber)
-//        let passwordQuery = URLQueryItem(name:"password", value:password)
-//        url.queryItems = [firstNameQuery, lastNameQuery, mailQuery, phoneNumberQuery, passwordQuery]
-        
-//        let toSend = url.query
-//        request.httpBody = toSend?.data(using: String.Encoding.utf8)
-//        		        }
+        runSignup(firstname: firstName, lastname: lastName, mail: mail, user: phoneNumber, pass: password)
     }
     
     //Connection to server and serialize data into JSON

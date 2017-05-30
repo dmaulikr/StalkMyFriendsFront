@@ -19,8 +19,6 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        interstitial = createAndLoadInterstitial()
-        
         let preferences = UserDefaults.standard
         
         if(preferences.object(forKey: "session") != nil) {
@@ -57,69 +55,65 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
     }
     
     @IBAction func sendLogin(_ sender: AnyObject) {
-        let usernameToServ = phoneNumber.text
-        let passwordToServ = password.text
-        
-        if(usernameToServ == "" || passwordToServ == ""){
-            displayAlertMessage(userMessage: "All fields are required")
+        guard let phoneNumberToSend = phoneNumber.text, let passwordToSend = password.text else {
             return
         }
         
-        runLog(user:usernameToServ!, pass:passwordToServ!)
-    }
-    
-    // Connection to server
-    func runLog(user:String, pass:String) {
-        guard let url = NSURL(string: "http://52.232.34.116:8080/api/user/connect") else {
-            print("Error url")
+        if(phoneNumberToSend == "" || passwordToSend == "") {
+            displayAlertMessage(title: "Empty fields", userMessage: "All fields are required")
+            return
+        }
+        
+        if(phoneNumberToSend.characters.count != 10) {
+            displayAlertMessage(title: "Invalid value", userMessage: "Phone number invalid")
+            return
+        }
+        
+        guard let url = URL(string: "http://52.232.34.116:8080/api/user/connect") else {
             return
         }
         
         let session = URLSession.shared
-        let request = NSMutableURLRequest(url: url as URL)
+        let request = NSMutableURLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        // Add params and grab query
-        let toSend = ["phoneNumber": user,"password":pass]
+        let toSend = ["phoneNumber": phoneNumberToSend, "password":passwordToSend]
         
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: toSend, options: .prettyPrinted)
-            print(NSString(data: request.httpBody!, encoding:String.Encoding.utf8.rawValue)!)
         } catch let error {
             print(error.localizedDescription)
         }
         
-        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            guard let data = data, error == nil else {
-//                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-//                    print("caca")
-//                    self.displayAlertMessage(userMessage: "Wrong password or email")
-//                }
+        DispatchQueue.main.async {
+            let task = session.dataTask(with: request as URLRequest){ data, response, error in
+                if error != nil{
+                    self.displayAlertMessage(title: "Error server", userMessage: "Error from server")
+                    return
+                }
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                    self.displayAlertMessage(title: "No account", userMessage: "Wrong phone number or password")
+                    return
+                }
                 
-//                if let httpResponse = response as? HTTPURLResponse {
-//                    print("1233")
-//                    print(httpResponse.statusCode)
-//                }
-                return
-            }
-            do {
-//                if let responseJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject] {
-//                    
-//                    
-//                }
-            //if responseJSON != nil{
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "loginToMap", sender: self)
+                do {
+                    if let responseJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String: AnyObject] {
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "loginToMap", sender: self)
+                        }
+                        
+                        self.interstitial = self.createAndLoadInterstitial()
                     }
                 }
-            //}
-//            catch let error {
-//                print(error.localizedDescription)
-//            }
-        })
-        task.resume()
+                catch let error {
+                    print(error.localizedDescription)
+                }
+            }
+            task.resume()
+        }
+
     }
     
     func LoginToDo() {
@@ -132,16 +126,13 @@ class LoginViewController: UIViewController, GADInterstitialDelegate {
         password.isEnabled = false
     }
     
-
-    
     // Display an alert message
-    func displayAlertMessage(userMessage: String){
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
-        
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
-        
-        myAlert.addAction(okAction)
-        
-        self.present(myAlert, animated: true, completion: nil)
+    func displayAlertMessage(title: String, userMessage: String){
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
